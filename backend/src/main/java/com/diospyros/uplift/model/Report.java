@@ -16,8 +16,8 @@ public class Report {
     // Executor - user who completed the task
     // Comment - comment of the completed task
 
-    int id;
-    Photo photo;
+    Long id;
+    String photo;
     User executor;
     String comment;
     @CreationTimestamp

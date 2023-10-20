@@ -28,9 +28,9 @@ public class Task {
     //  reportId - id of the report
     //  createdAt - date of creation of the task
 
-    int id;
+    Long id;
     int authorId;
-    Photo photo;
+    String photo;
     String description;
     String location;
     int reward;
