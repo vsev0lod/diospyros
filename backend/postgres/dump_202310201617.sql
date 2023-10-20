@@ -53,6 +53,25 @@ ALTER TABLE public.avatars_avatar_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE public.avatars_avatar_id_seq OWNED BY public.avatars.avatar_id;
 
+--
+-- Name: task; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.task (
+    task_id integer NOT NULL,
+    photo text,
+    desk character varying(255) NOT NULL,
+    location character varying(255) NOT NULL,
+    prize character varying(100) NOT NULL,
+    status
+    FOREIGN KEY (executor_id) REFERENCES user(user_id),
+    FOREIGN KEY (report_id) REFERENCES id(user_id),
+    FOREIGN KEY (author_id) REFERENCES user(user_id)
+);
+
+
+ALTER TABLE public.avatars OWNER TO postgres;
+
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
@@ -265,6 +284,31 @@ GRANT ALL ON FUNCTION pg_catalog.pg_replication_origin_xact_setup(pg_lsn, timest
 --
 
 GRANT ALL ON FUNCTION pg_catalog.pg_show_replication_origin_status(OUT local_id oid, OUT external_id text, OUT remote_lsn pg_lsn, OUT local_lsn pg_lsn) TO cloudsqlsuperuser;
+
+CREATE TYPE status AS ENUM (
+    'added',
+    'checked',
+    'in progress',
+    'completed'
+);
+
+CREATE TABLE task (
+    task_id integer PRIMARY KEY NOT NULL,
+    photo TEXT,
+    desk VARCHAR(255) NOT NULL,
+    location VARCHAR(100) NOT NULL,
+    reward VARCHAR(100),
+    status,
+    FOREIGN KEY (executor_id) REFERENCES user(user_id),
+    FOREIGN KEY (report_id) REFERENCES id(user_id),
+    FOREIGN KEY (author_id) REFERENCES user(user_id)
+);
+
+
+
+ALTER TABLE avatar RENAME TO photos;
+ALTER TABLE photos RENAME COLUMN avatar_id TO photos_id;
+ALTER TABLE users RENAME COLUMN avatar_id TO photos_id;
 
 
 --
