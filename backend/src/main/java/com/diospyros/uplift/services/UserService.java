@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 @AllArgsConstructor
 public class UserService {
@@ -14,7 +16,7 @@ public class UserService {
 
     public User getUser() {
         //return userRepository.getReferenceById()
-        return new User(1L, "Vasya", "vasye@email.com", 0L, 42.0);
+        return new User(1L, "Vasya", "vasye@email.com", 0L, 42L, new Date());
     }
 
 }
