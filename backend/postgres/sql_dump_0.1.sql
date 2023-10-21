@@ -1,11 +1,11 @@
 -- Create the 'user' table
 CREATE TYPE user_type AS ENUM ('user', 'goverment', 'moderator');
 
-CREATE TABLE user (
+CREATE TABLE users (
     id serial PRIMARY KEY,
     email VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(50) NOT NULL,
-    rating NUMERIC(2, 1) DEFAULT 0.0 CHECK (rating >= 0 AND rating <= 5)
+    rating NUMERIC(2, 1) DEFAULT 0.0 CHECK (rating >= 0 AND rating <= 5),
     user_type user_type NOT NULL,
     name VARCHAR(50) NOT NULL,
     description VARCHAR(100),
@@ -14,20 +14,22 @@ CREATE TABLE user (
 );
 
 -- Create the 'task' table
-CREATE TYPE task_type AS ENUM ('defined', 'inProgress', 'inReview', 'reworkRequested', 'dispute', 'completed');
-CREATE TYPE tag AS ENUM ('improve env', 'help people', 'events', 'emergency', 'other');
+-- Create the ENUM types if they don't already exist
+CREATE TYPE IF NOT EXISTS task_type AS ENUM ('defined', 'inProgress', 'inReview', 'reworkRequested', 'dispute', 'completed');
+CREATE TYPE IF NOT EXISTS tag AS ENUM ('improve env', 'help people', 'events', 'emergency', 'other');
 
+-- Create the task table
 CREATE TABLE task (
     id serial PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
     description VARCHAR(100),
-    task_type task_type DEFAULT 'defined',
+    task_type task_type DEFAULT 'defined'::task_type,
     created_at DATE NOT NULL,
     reward DECIMAL(10, 2) DEFAULT 0.0 NOT NULL,
     tag tag NOT NULL,
     location_id INT REFERENCES location(id),
     entity_id INT REFERENCES entity(id),
-    creator_id INT REFERENCES user(id),
+    creator_id INT REFERENCES users(id)
     -- Add other task-related fields here
 );
 
@@ -44,7 +46,7 @@ CREATE TABLE solution (
     description VARCHAR(100) NOT NULL,
     entity_id INT REFERENCES entity(id),
     task_id INT REFERENCES task(id),
-    creator_id INT REFERENCES user(id)
+    creator_id INT REFERENCES users(id)
     -- Add other solution item-related fields here
 );
 CREATE TYPE entity_type AS ENUM ('user', 'task', 'solution');
