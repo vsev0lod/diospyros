@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -73,7 +74,15 @@ public class ItemService extends GenericService<Item, ItemDTO> {
 		Integer entityId = id;
 		logger.debug("findById({})", entityId);
 		Optional<Item> optionalEntity = repository.findById(entityId);
+//		return this.customEntityToDto(optionalEntity);
 		return entityToDto(optionalEntity);
+	}
+
+	protected ItemDTO customEntityToDto(Item entity) {
+		ModelMapper mapper = new ModelMapper();
+		return mapper.
+				map(entity, ItemDTO.class);
+		// return BookMapper.getInstance().entityToDto(entity);
 	}
 
 	/**
