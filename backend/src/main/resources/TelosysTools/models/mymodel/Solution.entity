@@ -1,0 +1,14 @@
+@DbTable(solution)
+@DbSchema(public)
+Solution {
+  // attributes
+  id : int { @Id @GeneratedValue(IDENTITY) @DbName(id) @DbType(serial) @NotNull @NotEmpty };
+  description : string { @GeneratedValue(IDENTITY) @DbName(description) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  entityId : int { @GeneratedValue(IDENTITY) @DbName(entity_id) @DbType(int4) @FK(solution_entity_id_fkey, Entity.id) };
+  taskId : int { @GeneratedValue(IDENTITY) @DbName(task_id) @DbType(int4) @FK(solution_task_id_fkey, Task.id) };
+  creatorId : int { @GeneratedValue(IDENTITY) @DbName(creator_id) @DbType(int4) @FK(solution_creator_id_fkey, Users.id) };
+  // links
+  users : Users { @LinkByFK(solution_creator_id_fkey) };
+  entity : Entity { @LinkByFK(solution_entity_id_fkey) };
+  task : Task { @LinkByFK(solution_task_id_fkey) };
+}

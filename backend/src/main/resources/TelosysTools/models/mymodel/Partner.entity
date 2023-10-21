@@ -1,0 +1,10 @@
+@DbTable(partner)
+@DbSchema(public)
+Partner {
+  // attributes
+  id : int { @Id @GeneratedValue(IDENTITY) @DbName(id) @DbType(serial) @NotNull @NotEmpty };
+  name : string { @GeneratedValue(IDENTITY) @DbName(name) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  description : string { @GeneratedValue(IDENTITY) @DbName(description) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  website : string { @GeneratedValue(IDENTITY) @DbName(website) @DbType("varchar(100)") @Size(100) @MaxLen(100) };
+  // links
+}

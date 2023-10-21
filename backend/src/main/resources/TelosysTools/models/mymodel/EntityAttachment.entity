@@ -1,0 +1,10 @@
+@DbTable(entity_attachment)
+@DbSchema(public)
+EntityAttachment {
+  // attributes
+  entityId : int { @GeneratedValue(IDENTITY) @DbName(entity_id) @DbType(int4) @FK(entity_attachment_entity_id_fkey, Entity.id) };
+  attachmentId : int { @GeneratedValue(IDENTITY) @DbName(attachment_id) @DbType(int4) @FK(entity_attachment_attachment_id_fkey, Attachment.id) };
+  // links
+  attachment : Attachment { @LinkByFK(entity_attachment_attachment_id_fkey) };
+  entity : Entity { @LinkByFK(entity_attachment_entity_id_fkey) };
+}

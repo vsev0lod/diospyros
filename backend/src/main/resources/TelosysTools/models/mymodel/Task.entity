@@ -1,0 +1,19 @@
+@DbTable(task)
+@DbSchema(public)
+Task {
+  // attributes
+  id : int { @Id @GeneratedValue(IDENTITY) @DbName(id) @DbType(serial) @NotNull @NotEmpty };
+  title : string { @GeneratedValue(IDENTITY) @DbName(title) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  description : string { @GeneratedValue(IDENTITY) @DbName(description) @DbType("varchar(100)") @Size(100) @MaxLen(100) };
+  taskType : string { @GeneratedValue(IDENTITY) @DbName(task_type) @DbType("task_type(2147483647)") @Size(2147483647) @MaxLen(2147483647) };
+  createdAt : date { @GeneratedValue(IDENTITY) @DbName(created_at) @DbType(date) @NotNull @NotEmpty };
+  reward : decimal { @GeneratedValue(IDENTITY) @DbName(reward) @DbType("numeric(10,2)") @NotNull @NotEmpty @Size(10,2) };
+  tag : string { @GeneratedValue(IDENTITY) @DbName(tag) @DbType("tag(2147483647)") @NotNull @NotEmpty @Size(2147483647) @MaxLen(2147483647) };
+  locationId : int { @GeneratedValue(IDENTITY) @DbName(location_id) @DbType(int4) @FK(task_location_id_fkey, Location.id) };
+  entityId : int { @GeneratedValue(IDENTITY) @DbName(entity_id) @DbType(int4) @FK(task_entity_id_fkey, Entity.id) };
+  creatorId : int { @GeneratedValue(IDENTITY) @DbName(creator_id) @DbType(int4) @FK(task_creator_id_fkey, Users.id) };
+  // links
+  users : Users { @LinkByFK(task_creator_id_fkey) };
+  entity : Entity { @LinkByFK(task_entity_id_fkey) };
+  location : Location { @LinkByFK(task_location_id_fkey) };
+}

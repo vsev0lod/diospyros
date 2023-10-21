@@ -1,0 +1,8 @@
+@DbTable(attachment)
+@DbSchema(public)
+Attachment {
+  // attributes
+  id : int { @Id @GeneratedValue(IDENTITY) @DbName(id) @DbType(serial) @NotNull @NotEmpty };
+  attachment : binary { @GeneratedValue(IDENTITY) @DbName(attachment) @DbType("bytea(2147483647)") @NotNull @NotEmpty @Size(2147483647) };
+  // links
+}
