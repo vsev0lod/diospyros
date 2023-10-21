@@ -35,6 +35,7 @@ public abstract class GenericService<ENTITY, DTO> {
 		super();
 		this.entityClass = entityClass;
 		this.dtoClass = dtoClass;
+		this.mapper.getConfiguration().setAmbiguityIgnored(true);
 	}
 
 	/**

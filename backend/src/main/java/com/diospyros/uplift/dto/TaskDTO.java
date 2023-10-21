@@ -4,6 +4,9 @@
  */
 package com.diospyros.uplift.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,6 +17,8 @@ import java.time.LocalDate;
  * @author Telosys
  *
  */
+@Getter
+@Setter
 public class TaskDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,89 +46,6 @@ public class TaskDTO implements Serializable {
     public TaskDTO() {
 		super();
     }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setTitle( String title ) {
-        this.title = title ;
-    }
-    public String getTitle() {
-        return this.title;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setTaskType( String taskType ) {
-        this.taskType = taskType ;
-    }
-    public String getTaskType() {
-        return this.taskType;
-    }
-
-    public void setCreatedAt( LocalDate createdAt ) {
-        this.createdAt = createdAt ;
-    }
-    public LocalDate getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public void setReward( BigDecimal reward ) {
-        this.reward = reward ;
-    }
-    public BigDecimal getReward() {
-        return this.reward;
-    }
-
-    public void setTag( String tag ) {
-        this.tag = tag ;
-    }
-    public String getTag() {
-        return this.tag;
-    }
-
-    public void setLocationId( Integer locationId ) {
-        this.locationId = locationId ;
-    }
-    public Integer getLocationId() {
-        return this.locationId;
-    }
-
-    public void setEntityId( Integer entityId ) {
-        this.entityId = entityId ;
-    }
-    public Integer getEntityId() {
-        return this.entityId;
-    }
-
-    public void setCreatorId( Integer creatorId ) {
-        this.creatorId = creatorId ;
-    }
-    public Integer getCreatorId() {
-        return this.creatorId;
-    }
-
-    public UsersDTO getUsers() {
-        return this.users;
-    } 
-
-    public EntityDTO getEntity() {
-        return this.entity;
-    } 
-
-    public LocationDTO getLocation() {
-        return this.location;
-    } 
-
 	@Override
 	public String toString() { 
 		String separator = "|";

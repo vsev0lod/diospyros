@@ -25,7 +25,7 @@ import com.diospyros.uplift.dto.PartnerDTO;
 import com.diospyros.uplift.services.PartnerService;
 
 @RestController
-@RequestMapping(value = "/api/v1/partner", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/partners", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PartnerRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(PartnerRestController.class);

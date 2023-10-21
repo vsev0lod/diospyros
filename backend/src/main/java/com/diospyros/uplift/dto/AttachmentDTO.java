@@ -4,6 +4,9 @@
  */
 package com.diospyros.uplift.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +15,8 @@ import java.io.Serializable;
  * @author Telosys
  *
  */
+@Getter
+@Setter
 public class AttachmentDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,20 +31,6 @@ public class AttachmentDTO implements Serializable {
      */
     public AttachmentDTO() {
 		super();
-    }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setAttachment( byte[] attachment ) {
-        this.attachment = attachment ;
-    }
-    public byte[] getAttachment() {
-        return this.attachment;
     }
 
 	@Override

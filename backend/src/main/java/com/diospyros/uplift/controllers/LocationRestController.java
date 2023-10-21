@@ -25,7 +25,7 @@ import com.diospyros.uplift.dto.LocationDTO;
 import com.diospyros.uplift.services.LocationService;
 
 @RestController
-@RequestMapping(value = "/api/v1/location", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/locations", produces = MediaType.APPLICATION_JSON_VALUE)
 public class LocationRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LocationRestController.class);

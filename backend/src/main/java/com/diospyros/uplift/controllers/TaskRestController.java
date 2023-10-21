@@ -25,7 +25,7 @@ import com.diospyros.uplift.dto.TaskDTO;
 import com.diospyros.uplift.services.TaskService;
 
 @RestController
-@RequestMapping(value = "/api/v1/task", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/tasks", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TaskRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(TaskRestController.class);

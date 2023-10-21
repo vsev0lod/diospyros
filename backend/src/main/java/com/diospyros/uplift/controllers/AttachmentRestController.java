@@ -25,7 +25,7 @@ import com.diospyros.uplift.dto.AttachmentDTO;
 import com.diospyros.uplift.services.AttachmentService;
 
 @RestController
-@RequestMapping(value = "/api/v1/attachment", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/attachments", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AttachmentRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AttachmentRestController.class);

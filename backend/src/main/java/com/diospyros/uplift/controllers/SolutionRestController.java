@@ -25,7 +25,7 @@ import com.diospyros.uplift.dto.SolutionDTO;
 import com.diospyros.uplift.services.SolutionService;
 
 @RestController
-@RequestMapping(value = "/api/v1/solution", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/solutions", produces = MediaType.APPLICATION_JSON_VALUE)
 public class SolutionRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(SolutionRestController.class);

@@ -4,6 +4,9 @@
  */
 package com.diospyros.uplift.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -13,6 +16,8 @@ import java.math.BigDecimal;
  * @author Telosys
  *
  */
+@Getter
+@Setter
 public class UsersDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,63 +39,6 @@ public class UsersDTO implements Serializable {
     public UsersDTO() {
 		super();
     }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setEmail( String email ) {
-        this.email = email ;
-    }
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setPassword( String password ) {
-        this.password = password ;
-    }
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setRating( BigDecimal rating ) {
-        this.rating = rating ;
-    }
-    public BigDecimal getRating() {
-        return this.rating;
-    }
-
-    public void setUserType( String userType ) {
-        this.userType = userType ;
-    }
-    public String getUserType() {
-        return this.userType;
-    }
-
-    public void setName( String name ) {
-        this.name = name ;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setBalance( BigDecimal balance ) {
-        this.balance = balance ;
-    }
-    public BigDecimal getBalance() {
-        return this.balance;
-    }
-
 	@Override
 	public String toString() { 
 		String separator = "|";

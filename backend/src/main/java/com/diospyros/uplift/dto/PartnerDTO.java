@@ -4,6 +4,9 @@
  */
 package com.diospyros.uplift.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +15,8 @@ import java.io.Serializable;
  * @author Telosys
  *
  */
+@Getter
+@Setter
 public class PartnerDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,34 +33,6 @@ public class PartnerDTO implements Serializable {
      */
     public PartnerDTO() {
 		super();
-    }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setName( String name ) {
-        this.name = name ;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setWebsite( String website ) {
-        this.website = website ;
-    }
-    public String getWebsite() {
-        return this.website;
     }
 
 	@Override

@@ -25,7 +25,7 @@ import com.diospyros.uplift.dto.ItemDTO;
 import com.diospyros.uplift.services.ItemService;
 
 @RestController
-@RequestMapping(value = "/api/v1/item", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/items", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ItemRestController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ItemRestController.class);

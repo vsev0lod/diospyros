@@ -4,6 +4,9 @@
  */
 package com.diospyros.uplift.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 /**
@@ -12,6 +15,8 @@ import java.io.Serializable;
  * @author Telosys
  *
  */
+@Getter
+@Setter
 public class SolutionDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,53 +39,6 @@ public class SolutionDTO implements Serializable {
     public SolutionDTO() {
 		super();
     }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setEntityId( Integer entityId ) {
-        this.entityId = entityId ;
-    }
-    public Integer getEntityId() {
-        return this.entityId;
-    }
-
-    public void setTaskId( Integer taskId ) {
-        this.taskId = taskId ;
-    }
-    public Integer getTaskId() {
-        return this.taskId;
-    }
-
-    public void setCreatorId( Integer creatorId ) {
-        this.creatorId = creatorId ;
-    }
-    public Integer getCreatorId() {
-        return this.creatorId;
-    }
-
-    public UsersDTO getUsers() {
-        return this.users;
-    } 
-
-    public EntityDTO getEntity() {
-        return this.entity;
-    } 
-
-    public TaskDTO getTask() {
-        return this.task;
-    } 
 
 	@Override
 	public String toString() { 
