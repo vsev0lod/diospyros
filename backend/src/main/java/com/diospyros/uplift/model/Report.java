@@ -24,7 +24,7 @@ public class Report {
     @Id
     Long id;
     String photo;
-    User executor;
+    Long executor;
     String comment;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
