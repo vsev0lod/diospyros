@@ -7,6 +7,8 @@ package com.diospyros.uplift.persistence.entities;
 import java.io.Serializable;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * JPA entity class for "Item"
@@ -14,6 +16,8 @@ import jakarta.persistence.Entity;
  * @author Telosys
  *
  */
+@Getter
+@Setter
 @Entity
 @Table(name="item", schema="public" )
 public class Item implements Serializable {
@@ -33,8 +37,8 @@ public class Item implements Serializable {
     @Column(name="description", nullable=false, length=100)
     private String     description ;
 
-    @Column(name="partner_id")
-    private Integer    partnerId ;
+//    @Column(name="partner_id")
+//    private Integer    partnerId ;
 
     //--- LINKS ( RELATIONSHIPS )
     @ManyToOne
@@ -43,42 +47,10 @@ public class Item implements Serializable {
 
     /**
      * Constructor
-     */
+     */`
     public Item() {
 		super();
     }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setCost( int cost ) {
-        this.cost = cost ;
-    }
-    public int getCost() {
-        return this.cost;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setPartnerId( Integer partnerId ) {
-        this.partnerId = partnerId ;
-    }
-    public Integer getPartnerId() {
-        return this.partnerId;
-    }
-
-    public Partner getPartner() {
-        return this.partner;
-    } 
 
 	@Override
 	public String toString() { 
@@ -88,7 +60,7 @@ public class Item implements Serializable {
 		sb.append("id=").append(id);
 		sb.append(separator).append("cost=").append(cost);
 		sb.append(separator).append("description=").append(description);
-		sb.append(separator).append("partnerId=").append(partnerId);
+//		sb.append(separator).append("partnerId=").append(partnerId);
 		sb.append("]");
 		return sb.toString();
 	}
