@@ -1,0 +1,11 @@
+@DbTable(item)
+@DbSchema(public)
+Item {
+  // attributes
+  id : int { @Id @GeneratedValue(IDENTITY) @DbName(id) @DbType(serial) @NotNull @NotEmpty };
+  cost : int { @GeneratedValue(IDENTITY) @DbName(cost) @DbType(int4) @NotNull @NotEmpty };
+  description : string { @GeneratedValue(IDENTITY) @DbName(description) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  partnerId : int { @GeneratedValue(IDENTITY) @DbName(partner_id) @DbType(int4) @FK(item_partner_id_fkey, Partner.id) };
+  // links
+  partner : Partner { @LinkByFK(item_partner_id_fkey) };
+}

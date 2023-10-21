@@ -2,8 +2,10 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.5'
 	id 'io.spring.dependency-management' version '1.1.3'
+	id "org.flywaydb.flyway" version "9.22.3"
 }
 
+def flywayVersion = '9.22.3'
 group = 'com.diospyros'
 version = '0.0.1-SNAPSHOT'
 
@@ -27,6 +29,23 @@ ext {
 	set('springCloudVersion', "2022.0.4")
 }
 
+flyway {
+	url = 'jdbc:postgresql://localhost:5432/diospyros'
+	user = 'postgres'
+	password = 'diospyros'
+	schemas = ['public']
+	cleanDisabled = false
+//	placeholders = [
+//			'keyABC': 'valueXYZ',
+//			'otherplaceholder': 'value123'
+//	]
+}
+//dependencies {
+//	compile "org.flywaydb:flyway-core:${flywayVersion}"
+//}
+
+flywayMigrate.dependsOn classes
+
 dependencies {
 	implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
@@ -39,6 +58,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.modelmapper:modelmapper:3.0.0'
 }
 
 dependencyManagement {

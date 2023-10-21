@@ -1,0 +1,16 @@
+@DbTable(flyway_schema_history)
+@DbSchema(public)
+FlywaySchemaHistory {
+  // attributes
+  installedRank : int { @Id @GeneratedValue(IDENTITY) @DbName(installed_rank) @DbType(int4) @NotNull @NotEmpty };
+  version : string { @GeneratedValue(IDENTITY) @DbName(version) @DbType("varchar(50)") @Size(50) @MaxLen(50) };
+  description : string { @GeneratedValue(IDENTITY) @DbName(description) @DbType("varchar(200)") @NotNull @NotEmpty @Size(200) @MaxLen(200) };
+  type : string { @GeneratedValue(IDENTITY) @DbName(type) @DbType("varchar(20)") @NotNull @NotEmpty @Size(20) @MaxLen(20) };
+  script : string { @GeneratedValue(IDENTITY) @DbName(script) @DbType("varchar(1000)") @NotNull @NotEmpty @Size(1000) @MaxLen(1000) };
+  checksum : int { @GeneratedValue(IDENTITY) @DbName(checksum) @DbType(int4) };
+  installedBy : string { @GeneratedValue(IDENTITY) @DbName(installed_by) @DbType("varchar(100)") @NotNull @NotEmpty @Size(100) @MaxLen(100) };
+  installedOn : timestamp { @GeneratedValue(IDENTITY) @DbName(installed_on) @DbType(timestamp) @NotNull @NotEmpty };
+  executionTime : int { @GeneratedValue(IDENTITY) @DbName(execution_time) @DbType(int4) @NotNull @NotEmpty };
+  success : boolean { @GeneratedValue(IDENTITY) @DbName(success) @DbType(bool) @NotNull @NotEmpty };
+  // links
+}

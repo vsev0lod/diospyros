@@ -1,0 +1,14 @@
+@DbTable(users)
+@DbSchema(public)
+Users {
+  // attributes
+  id : int { @Id @GeneratedValue(IDENTITY) @DbName(id) @DbType(serial) @NotNull @NotEmpty };
+  email : string { @GeneratedValue(IDENTITY) @DbName(email) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  password : string { @GeneratedValue(IDENTITY) @DbName(password) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  rating : decimal { @GeneratedValue(IDENTITY) @DbName(rating) @DbType("numeric(2,1)") @Size(2,1) };
+  userType : string { @GeneratedValue(IDENTITY) @DbName(user_type) @DbType("user_type(2147483647)") @NotNull @NotEmpty @Size(2147483647) @MaxLen(2147483647) };
+  name : string { @GeneratedValue(IDENTITY) @DbName(name) @DbType("varchar(50)") @NotNull @NotEmpty @Size(50) @MaxLen(50) };
+  description : string { @GeneratedValue(IDENTITY) @DbName(description) @DbType("varchar(100)") @Size(100) @MaxLen(100) };
+  balance : decimal { @GeneratedValue(IDENTITY) @DbName(balance) @DbType("numeric(10,2)") @Size(10,2) };
+  // links
+}

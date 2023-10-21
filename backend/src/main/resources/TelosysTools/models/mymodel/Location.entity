@@ -1,0 +1,8 @@
+@DbTable(location)
+@DbSchema(public)
+Location {
+  // attributes
+  id : int { @Id @GeneratedValue(IDENTITY) @DbName(id) @DbType(serial) @NotNull @NotEmpty };
+  decimalDegrees : string { @GeneratedValue(IDENTITY) @DbName(decimal_degrees) @DbType(point) @NotNull @NotEmpty @MaxLen(2147483647) };
+  // links
+}

@@ -1,0 +1,8 @@
+@DbTable(entity)
+@DbSchema(public)
+Entity {
+  // attributes
+  id : int { @Id @GeneratedValue(IDENTITY) @DbName(id) @DbType(serial) @NotNull @NotEmpty };
+  entityType : string { @GeneratedValue(IDENTITY) @DbName(entity_type) @DbType("entity_type(2147483647)") @NotNull @NotEmpty @Size(2147483647) @MaxLen(2147483647) };
+  // links
+}

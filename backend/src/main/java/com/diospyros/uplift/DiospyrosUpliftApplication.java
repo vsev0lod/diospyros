@@ -9,5 +9,4 @@ public class DiospyrosUpliftApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DiospyrosUpliftApplication.class, args);
 	}
-
 }
