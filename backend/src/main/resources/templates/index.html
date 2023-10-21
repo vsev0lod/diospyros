@@ -8,16 +8,21 @@
 
     <!-- Local Bootstrap JS and dependencies -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="mb-4">
-        <!--                <img th:src="@{'data:image/png;base64,' + ${T(org.springframework.util.Base64Utils).encodeToString(user.avatar)}}" alt="User Avatar" class="rounded-circle" width="50">-->
-        <span th:text="${user.name}" class="h4"></span>
-
+<header class="mb-4 bg-dark text-white text-right p-3 fixed-top">
+    <!-- Uncomment the below line when you need the avatar -->
+    <!-- <img th:src="@{'data:image/png;base64,' + ${T(org.springframework.util.Base64Utils).encodeToString(user.avatar)}}" alt="User Avatar" class="rounded-circle" width="50"> -->
+    <span th:text="${user.name}" class="h4"></span>
 </header>
+
 
 <section class="mb-4">
     <h2>Tasks</h2>
@@ -41,7 +46,8 @@
         };
         var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
     }
-</script><script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${googleMapsApiKey} + '&callback=myMap'"></script>
+</script>
+<script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${googleMapsApiKey} + '&callback=myMap'"></script>
 
 </body>
 </html>
