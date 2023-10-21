@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Router, Link, navigate } from '@reach/router';
+import LoginPage from './LoginPage';
+import MainPage from './MainPage';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    const handleSuccessfulLogin = () => {
+        setLoggedIn(true);
+        navigate('/main');
+    };
+
+    const handleLogout = () => {
+        setLoggedIn(false);
+        navigate('/login');
+    };
+
+    return (
+        <div>
+            <nav>
+                {loggedIn ? (
+                    <Link to="/main">Main</Link> | <button onClick={handleLogout}>Logout</button>
+                ) : (
+                    null
+                )}
+            </nav>
+            <Router>
+                <LoginPage path="/login" onLogin={handleSuccessfulLogin} />
+                <MainPage path="/main" loggedIn={loggedIn} />
+            </Router>
+        </div>
+    );
 }
 
 export default App;

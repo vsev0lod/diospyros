@@ -1,0 +1,28 @@
+/* MainPage.css */
+
+.main-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.user-info {
+    flex: 1;
+    padding: 20px;
+    background-color: #f0f0f0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.logout-button {
+    padding: 10px 20px;
+    background-color: #ff0000; /* Red background color for the Logout button */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #cc0000; /* Darker red when hovered over */
+}
