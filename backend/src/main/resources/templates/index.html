@@ -1,15 +1,105 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
-<head lang="en">
-    <meta charset="UTF-8"/>
-    <title>ReactJS + Spring Data REST</title>
-    <link rel="stylesheet" href="/main.css" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPLIFT Tasks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #sidebar {
+            background-color: #333;
+            color: #fff;
+            width: 250px;
+            padding: 20px;
+        }
+
+        #avatar {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            background-size: cover;
+
+            background-image: url('img/av.jpg');
+        }
+
+        #account-details {
+            margin-top: 20px;
+        }
+
+        #main {
+            flex-grow: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #tasks {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        #tasks ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #tasks li {
+            margin-bottom: 10px;
+        }
+
+        #google-maps {
+            height: 300px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+
+        #task-details {
+            background-color: #f4f4f4;
+            padding: 20px;
+            flex-grow: 1;
+        }
+    </style>
 </head>
 <body>
+    <div id="sidebar">
+            <div id="avatar"><img src=""></img></div>
+        <div id="account-details">
+            <p>Name: John Doe</p>
+            <p>Email: john@example.com</p>
+            <p>Rating: 4.5</p>
+            <p>Achievements: 10</p>
+        </div>
+    </div>
 
-<div id="react"></div>
-
-<script src="built/bundle.js"></script>
-
+<!-- Tab content -->
+    <div id="main">
+        <div id="tasks">
+            <h2>Tasks</h2>
+            <ul>
+                <li>Task 1</li>
+                <li>Task 2</li>
+                <li>Task 3</li>
+            </ul>
+        </div>
+        <div id="google-maps">
+                <iframe src="https://storage.googleapis.com/maps-solutions-39jqvpz57i/neighborhood-discovery/bb07/neighborhood-discovery.html"
+                  width="100%" height="100%"
+                  style="border:0;"
+                  loading="lazy">
+                </iframe>
+        </div>
+    </div>
+    <div id="task-details">
+        <h2>Task Details</h2>
+        <p>Selected Task Information</p>
+    </div>
 </body>
 </html>
