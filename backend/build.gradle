@@ -34,6 +34,7 @@ flyway {
 	user = 'postgres'
 	password = 'diospyros'
 	schemas = ['public']
+	cleanDisabled = false
 //	placeholders = [
 //			'keyABC': 'valueXYZ',
 //			'otherplaceholder': 'value123'
@@ -57,6 +58,7 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.modelmapper:modelmapper:3.0.0'
 }
 
 dependencyManagement {
