@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Diospyros UPLIFT</title>
+</head>
+<body>
+
+<form th:action="@{/auth/login}" th:object="${loginDTO}" method="post">
+    <div>
+        <label>Username:</label>
+        <input type="text" th:field="*{username}" />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" th:field="*{password}" />
+    </div>
+    <div>
+        <input type="submit" value="Login" />
+    </div>
+</form>
+
+</body>
+</html>

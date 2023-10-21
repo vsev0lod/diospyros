@@ -1,105 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UPLIFT Tasks</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
-            margin: 0;
-        }
-
-        #sidebar {
-            background-color: #333;
-            color: #fff;
-            width: 250px;
-            padding: 20px;
-        }
-
-        #avatar {
-            border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            background-color: #fff;
-            background-size: cover;
-
-            background-image: url('img/av.jpg');
-        }
-
-        #account-details {
-            margin-top: 20px;
-        }
-
-        #main {
-            flex-grow: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        #tasks {
-            flex-grow: 1;
-            border: 1px solid #ccc;
-            padding: 20px;
-        }
-
-        #tasks ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        #tasks li {
-            margin-bottom: 10px;
-        }
-
-        #google-maps {
-            height: 300px;
-            border: 1px solid #ccc;
-            margin-top: 20px;
-        }
-
-        #task-details {
-            background-color: #f4f4f4;
-            padding: 20px;
-            flex-grow: 1;
-        }
-    </style>
+    <title th:text="'UPLIFT - ' + ${user.name}"></title>
+    <!-- You might want to include Bootstrap, Google Maps JS SDK and other required JS/CSS here -->
 </head>
 <body>
-    <div id="sidebar">
-            <div id="avatar"><img src=""></img></div>
-        <div id="account-details">
-            <p>Name: John Doe</p>
-            <p>Email: john@example.com</p>
-            <p>Rating: 4.5</p>
-            <p>Achievements: 10</p>
-        </div>
-    </div>
 
-<!-- Tab content -->
-    <div id="main">
-        <div id="tasks">
-            <h2>Tasks</h2>
-            <ul>
-                <li>Task 1</li>
-                <li>Task 2</li>
-                <li>Task 3</li>
-            </ul>
-        </div>
-        <div id="google-maps">
-                <iframe src="https://storage.googleapis.com/maps-solutions-39jqvpz57i/neighborhood-discovery/bb07/neighborhood-discovery.html"
-                  width="100%" height="100%"
-                  style="border:0;"
-                  loading="lazy">
-                </iframe>
-        </div>
-    </div>
-    <div id="task-details">
-        <h2>Task Details</h2>
-        <p>Selected Task Information</p>
-    </div>
+<header>
+<!--    <img th:src="@{'data:image/png;base64,' + ${T(org.springframework.util.Base64Utils).encodeToString(user.avatar)}}"-->
+<!--         alt="User Avatar">-->
+    <span th:text="${user.name}"></span>
+</header>
+
+<section>
+    <h2>Tasks</h2>
+    <ul>
+        <li th:each="task : ${tasks}" th:text="${task.title}"></li>
+    </ul>
+</section>
+
+<section>
+    <h2>Map</h2>
+    <div id="googleMap" style="width:100%;height:400px;"></div>
+</section>
+
+<script>
+    function myMap() {
+        var mapProp= {
+            center:new google.maps.LatLng(51.508742,-0.120850),
+            zoom:5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
+</script><script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${googleMapsApiKey} + '&callback=myMap'"></script>
+
 </body>
 </html>
