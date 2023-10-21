@@ -2,21 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="'UPLIFT - ' + ${user.name}"></title>
-    <!-- You might want to include Bootstrap, Google Maps JS SDK and other required JS/CSS here -->
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon.png}"/>
+    <!-- Local Bootstrap CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Local Bootstrap JS and dependencies -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </head>
+
 <body>
 
-<header>
-<!--    <img th:src="@{'data:image/png;base64,' + ${T(org.springframework.util.Base64Utils).encodeToString(user.avatar)}}"-->
-<!--         alt="User Avatar">-->
-    <span th:text="${user.name}"></span>
+<header class="mb-4">
+        <!--                <img th:src="@{'data:image/png;base64,' + ${T(org.springframework.util.Base64Utils).encodeToString(user.avatar)}}" alt="User Avatar" class="rounded-circle" width="50">-->
+        <span th:text="${user.name}" class="h4"></span>
+
 </header>
 
-<section>
+<section class="mb-4">
     <h2>Tasks</h2>
-    <ul>
-        <li th:each="task : ${tasks}" th:text="${task.title}"></li>
-    </ul>
+    <div class="bg-white p-3 rounded">
+        <ul>
+            <li th:each="task : ${tasks}" th:text="${task.title}"></li>
+        </ul>
+    </div>
 </section>
 
 <section>
