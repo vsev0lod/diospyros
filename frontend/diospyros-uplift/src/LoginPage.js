@@ -11,6 +11,7 @@ function LoginPage(props) {
         if (username === 'demo' && password === 'password') {
             // Successful login
             props.onLogin(); // Call the onLogin callback to handle successful login
+            window.location.reload();
         } else {
             alert('Invalid username or password');
         }

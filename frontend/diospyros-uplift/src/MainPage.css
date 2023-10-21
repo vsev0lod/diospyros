@@ -2,26 +2,27 @@
 
 .main-page {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     height: 100vh;
-    background-color: #f0f0f0; /* Background color for the entire page */
+    background-color: #f0f0f0;
 }
 
 .user-info {
-    background-color: #ffffff;
+    flex: 1;
     padding: 20px;
-    border-radius: 10px;
+    background-color: #f0f0f0;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
 }
 
-.user-info h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
+.logout-button {
+    padding: 10px 20px;
+    background-color: #ff0000; /* Red background color for the Logout button */
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
-.user-info p {
-    font-size: 16px;
-    margin: 10px 0;
+.logout-button:hover {
+    background-color: #cc0000; /* Darker red when hovered over */
 }
