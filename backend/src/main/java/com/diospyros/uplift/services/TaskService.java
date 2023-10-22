@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 
+import com.diospyros.uplift.dto.EntityDTO;
+import com.diospyros.uplift.persistence.entities.Entity;
+import com.diospyros.uplift.persistence.repositories.EntityRepository;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -31,15 +35,17 @@ public class TaskService extends GenericService<Task, TaskDTO> {
 	private static final Logger logger = LoggerFactory.getLogger(TaskService.class);
 
 	private final TaskRepository repository; // injected by constructor
+	private final EntityRepository entityRepository; // injected by constructor
 
 	/**
 	 * Constructor (usable for Dependency Injection)
 	 * 
 	 * @param repository the repository to be injected
 	 */
-	public TaskService(TaskRepository repository) {
+	public TaskService(TaskRepository repository, EntityRepository entityRepository) {
 		super(Task.class, TaskDTO.class);
 		this.repository = repository;
+		this.entityRepository = entityRepository;
 	}
 	
 	/**
@@ -139,6 +145,15 @@ public class TaskService extends GenericService<Task, TaskDTO> {
 	public boolean create(TaskDTO dto) {
 		logger.debug("create({})", dto);
 		// auto-generated Primary Key
+//		EntityDTO entityDTO = new EntityDTO();
+//		entityDTO.setEntityType("task");
+
+//		ModelMapper mapper = new ModelMapper();
+//		mapper.getConfiguration().setAmbiguityIgnored(true);
+//		Entity e = entityRepository.save(mapper.map(dto, Entity.class));
+//
+//		dto.setEntityId(e.getId());
+
 		repository.save(dtoToEntity(dto));
 		return true; // always created
 	}

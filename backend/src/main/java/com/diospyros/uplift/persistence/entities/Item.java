@@ -47,7 +47,7 @@ public class Item implements Serializable {
 
     /**
      * Constructor
-     */`
+     */
     public Item() {
 		super();
     }

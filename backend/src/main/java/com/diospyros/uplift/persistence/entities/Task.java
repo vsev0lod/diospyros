@@ -29,6 +29,9 @@ import java.time.LocalDate;
  *
  */
 
+
+
+
 @Entity
 @Table(name="task", schema="public" )
 public class Task implements Serializable {
