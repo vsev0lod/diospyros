@@ -1,5 +1,6 @@
 package com.diospyros.uplift.controllers;
 
+import com.diospyros.uplift.Status;
 import com.diospyros.uplift.dto.NewTaskDTO;
 import com.diospyros.uplift.persistence.entities.Task;
 import com.diospyros.uplift.persistence.entities.Users;
@@ -89,6 +90,7 @@ public class TaskController {
                 .tag(user.getUserType())
                 .reward(BigDecimal.valueOf(100))
                 .location(latitude + "," + longitude)
+                .status(Status.DEFINED.toString())
                 .build();
 
         taskRepository.save(newTask);

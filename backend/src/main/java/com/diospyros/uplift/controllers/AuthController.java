@@ -53,7 +53,7 @@ public class AuthController {
             return "redirect:/auth/register?error=userexists";
         }
 
-        if (!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())){
+        if (!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())) {
             return "redirect:/auth/register?error=passwordsdontmatch";
         }
         Users newUser = new Users();
