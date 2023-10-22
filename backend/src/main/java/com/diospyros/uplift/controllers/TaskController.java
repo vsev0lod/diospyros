@@ -81,7 +81,7 @@ public class TaskController {
             return "redirect:/auth/login";
         }
 
-        Users user = userRepository.findById(UUID.fromString(userId)).orElseThrow(IllegalArgumentException::new);
+        Users user = userRepository.findById(UUID.fromString(userId.toString())).orElseThrow(IllegalArgumentException::new);
 
         Task newTask = Task.builder().
                 title(task.getTitle())
