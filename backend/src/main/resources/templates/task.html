@@ -37,7 +37,7 @@
     <span class="badge badge-primary" th:text="${task.tag}"></span>
 
     <!-- Creator's Name -->
-    <p class="mb-4"><strong>Created by:</strong> <span th:text="${task.creatorId}"></span></p>
+    <p class="mb-4"><strong>Created by:</strong> <span th:text="${user.name}"></span></p>
 
     <!-- Reward -->
     <p class="mb-4">
@@ -54,7 +54,7 @@
 
 <script>
     function initMap() {
-        var coords = "[[${task.location}]]".replace('(', '').replace(')', '');;
+        var coords = "[[${task.location}]]".replace('(', '').replace(')', '');
         var [lat, lng] = coords.split(',').map(coord => parseFloat(coord.trim()));
 
         var mapProp = {
