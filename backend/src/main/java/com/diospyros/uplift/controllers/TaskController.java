@@ -3,9 +3,11 @@ package com.diospyros.uplift.controllers;
 import com.diospyros.uplift.Status;
 import com.diospyros.uplift.dto.NewTaskDTO;
 import com.diospyros.uplift.persistence.entities.Attachment;
+import com.diospyros.uplift.persistence.entities.Solution;
 import com.diospyros.uplift.persistence.entities.Task;
 import com.diospyros.uplift.persistence.entities.Users;
 import com.diospyros.uplift.persistence.repositories.AttachmentRepository;
+import com.diospyros.uplift.persistence.repositories.SolutionRepository;
 import com.diospyros.uplift.persistence.repositories.TaskRepository;
 import com.diospyros.uplift.persistence.repositories.UsersRepository;
 import jakarta.servlet.http.HttpSession;
@@ -33,6 +35,9 @@ public class TaskController {
     private TaskRepository taskRepository;
 
     @Autowired
+    private SolutionRepository solutionRepository;
+
+    @Autowired
     private UsersRepository userRepository;
 
     @Autowired
@@ -52,7 +57,28 @@ public class TaskController {
         model.addAttribute("googleMapsApiKey", googleMapsApiKey);
         Task task = taskRepository.findById(UUID.fromString(id)).orElseThrow(IllegalArgumentException::new);
         model.addAttribute("task", task);
+//        model.addAttribute("taskId", task.getId().toString());
+
+        try {
+            Solution solution = solutionRepository.findByTaskId(UUID.fromString(id));
+            if (solution != null) {
+                model.addAttribute("solution", solution);
+            }
+        } catch (Exception e) {
+
+        }
+
         return "task";
+    }
+
+    @GetMapping("/{taskId}/solution")
+    public String showCreatedSolution(@PathVariable String taskId, Model model) {
+        Task task = taskRepository.findById(UUID.fromString(taskId)).orElseThrow(IllegalArgumentException::new);
+        Solution solution = solutionRepository.findByTaskId(UUID.fromString(taskId));
+        model.addAttribute("task", task);
+        model.addAttribute("solution", solution);
+
+        return "solutionDisplay"; // This is the name of your Thymeleaf template
     }
 
     @GetMapping("/new")

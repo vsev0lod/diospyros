@@ -16,23 +16,10 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Create Solution</h2>
-    <form th:action="@{/solution/create}" method="post" enctype="multipart/form-data">
-        <!-- Solution Description -->
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
-        </div>
+    <h2>Solution</h2>
 
-        <!-- Upload Photos -->
-        <div class="form-group">
-            <label for="photos">Upload Photos:</label>
-            <input type="file" class="form-control-file" id="photos" name="photos" multiple>
-        </div>
+    <h3 th:text="${solution.description}" class="mb-4"></h3>
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">Submit Solution</button>
-    </form>
 </div>
 </body>
 </html>

@@ -30,6 +30,8 @@ import java.util.UUID;
 @Repository
 public interface SolutionRepository extends JpaRepository<Solution, UUID> {
 
+    Solution findByTaskId(UUID id);
+
 	// Insert specific finders here 
 
 	//List<Solution> findByXxx(String xxx);
