@@ -10,6 +10,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.diospyros.uplift.persistence.entities.Task;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 /**
  * Spring Data JPA repository for entity "Task" <br> 
  * 
@@ -26,7 +28,7 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Integer> {
+public interface TaskRepository extends JpaRepository<Task, UUID> {
 
 	// Insert specific finders here 
 

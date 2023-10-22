@@ -10,6 +10,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.diospyros.uplift.persistence.entities.Users;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 /**
  * Spring Data JPA repository for entity "Users" <br> 
  * 
@@ -26,11 +30,11 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface UsersRepository extends JpaRepository<Users, Integer> {
+public interface UsersRepository extends JpaRepository<Users, UUID> {
 
-	// Insert specific finders here 
+	// Insert specific finders here
 
-	//List<Users> findByXxx(String xxx);
+	Optional<Users> findByEmail(String email);
 
 	//List<Users> findByXxxStartingWith(String xxx);
 

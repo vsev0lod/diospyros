@@ -4,197 +4,67 @@
  */
 package com.diospyros.uplift.persistence.entities;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import lombok.Builder;
+import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 /**
  * JPA entity class for "Task"
  *
  * @author Telosys
- *
  */
 
 
 
 
 @Entity
-@Table(name="task", schema="public" )
+@Data
+@Builder
+@Table(name = "task", schema = "public")
 public class Task implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     //--- PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private int        id ;
+    @Column(name = "id", nullable = false)
+    private UUID id;
 
     //--- OTHER DATA FIELDS 
-    @Column(name="title", nullable=false, length=50)
-    private String     title ;
+    @Column(name = "title", nullable = false, length = 50)
+    private String title;
 
-    @Column(name="description", length=100)
-    private String     description ;
+    @Column(name = "description", length = 100)
+    private String description;
 
-    @Column(name="task_type", length=2147483647)
-    private String     taskType ;
+    @Column(name = "task_type", length = 2147483647)
+    private String taskType;
 
-    @Column(name="created_at", nullable=false)
-    private LocalDate createdAt ;
+    @Column(name = "created_at", nullable = false)
+    private LocalDate createdAt;
 
-    @Column(name="reward", nullable=false)
-    private BigDecimal reward ;
+    @Column(name = "reward", nullable = false)
+    private BigDecimal reward;
 
-    @Column(name="tag", nullable=false, length=2147483647)
-    private String     tag ;
+    @Column(name = "tag", nullable = false, length = 2147483647)
+    private String tag;
 
-    @Column(name="location_id")
-    private Integer    locationId ;
+    @Column(name = "location")
+    private String location;
 
-    @Column(name="entity_id")
-    private Integer    entityId ;
+    @Column(name = "creator_id")
+    private UUID creatorId;
 
-    @Column(name="creator_id")
-    private Integer    creatorId ;
-
-    //--- LINKS ( RELATIONSHIPS )
-    @ManyToOne
-    @JoinColumn(name="creator_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Users      users ; 
-
-    @ManyToOne
-    @JoinColumn(name="entity_id", referencedColumnName="id", insertable=false, updatable=false)
-    private com.diospyros.uplift.persistence.entities.Entity     entity ;
-
-    @ManyToOne
-    @JoinColumn(name="location_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Location   location ;
-
-    @OneToOne(mappedBy = "task", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Solution solution;
-
-    /**
-     * Constructor
-     */
-    public Task() {
-		super();
-    }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setTitle( String title ) {
-        this.title = title ;
-    }
-    public String getTitle() {
-        return this.title;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setTaskType( String taskType ) {
-        this.taskType = taskType ;
-    }
-    public String getTaskType() {
-        return this.taskType;
-    }
-
-    public void setCreatedAt( LocalDate createdAt ) {
-        this.createdAt = createdAt ;
-    }
-    public LocalDate getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public void setReward( BigDecimal reward ) {
-        this.reward = reward ;
-    }
-    public BigDecimal getReward() {
-        return this.reward;
-    }
-
-    public void setTag( String tag ) {
-        this.tag = tag ;
-    }
-    public String getTag() {
-        return this.tag;
-    }
-
-    public void setLocationId( Integer locationId ) {
-        this.locationId = locationId ;
-    }
-    public Integer getLocationId() {
-        return this.locationId;
-    }
-
-    public void setEntityId( Integer entityId ) {
-        this.entityId = entityId ;
-    }
-    public Integer getEntityId() {
-        return this.entityId;
-    }
-
-    public void setCreatorId( Integer creatorId ) {
-        this.creatorId = creatorId ;
-    }
-    public Integer getCreatorId() {
-        return this.creatorId;
-    }
-
-    public Users getUsers() {
-        return this.users;
-    } 
-
-    public com.diospyros.uplift.persistence.entities.Entity getEntity() {
-        return this.entity;
-    } 
-
-    public Location getLocation() {
-        return this.location;
-    } 
-
-	@Override
-	public String toString() { 
-		String separator = "|";
-		StringBuilder sb = new StringBuilder();
-		sb.append("Task[");
-		sb.append("id=").append(id);
-		sb.append(separator).append("title=").append(title);
-		sb.append(separator).append("description=").append(description);
-		sb.append(separator).append("taskType=").append(taskType);
-		sb.append(separator).append("createdAt=").append(createdAt);
-		sb.append(separator).append("reward=").append(reward);
-		sb.append(separator).append("tag=").append(tag);
-		sb.append(separator).append("locationId=").append(locationId);
-		sb.append(separator).append("entityId=").append(entityId);
-		sb.append(separator).append("creatorId=").append(creatorId);
-		sb.append("]");
-		return sb.toString();
-	}
-
+    @Column(name = "status")
+    private String status;
 }

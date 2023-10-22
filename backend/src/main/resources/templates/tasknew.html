@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'UPLIFT - New Task'"></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+            integrity="Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z"
+            crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon.png}"/>
+    <!-- Local Bootstrap CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Local Bootstrap JS and dependencies -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!-- Optionally, include the Font Awesome stylesheet if you're using it -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="mb-4 bg-dark text-white p-3 fixed-top d-flex justify-content-between align-items-center">
+    <!-- User's balance on the left with a coin emoji -->
+    <div class="h4"><span>💰</span> <span th:text="${user.balance.intValue()}"></span></div>
+
+    <!-- User's name on the right -->
+    <span th:text="${user.name}" class="h4"></span>
+</header>
+
+<div class="container mt-5">
+    <form th:object="${task}" th:action="@{/task/new}" method="post" enctype="multipart/form-data">
+        <!-- Task Title -->
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}" required>
+        </div>
+
+        <!-- Task Description -->
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" th:field="*{description}" rows="4"></textarea>
+        </div>
+
+        <label for="taskType">Tag:</label>
+        <select id="taskType" th:field="*{taskType}">
+            <option value="Emergency">Emergency</option>
+            <option value="Help people">Help people</option>
+            <option value="Improve environment">Improve environment</option>
+            <option value="Others">Others</option>
+        </select>
+
+        <!-- Attach Photos -->
+        <div class="form-group">
+            <label for="photos">Attach Photos:</label>
+            <input type="file" class="form-control-file" id="photos" name="photos" multiple>
+        </div>
+
+        <!-- Google Map -->
+        <div id="locationMap" style="width:100%;height:400px;" class="mb-4"></div>
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Create Task</button>
+    </form>
+</div>
+
+<script>
+    var map;
+    var marker;
+
+    function initMap() {
+        var initialLocation = {lat: 50.0765525, lng: 14.4383934};
+
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                initialLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                setMap(initialLocation);
+            }, function(error) {
+                // If there's an error (e.g., user denied location request), just use the default location
+                setMap(initialLocation);
+            });
+        } else {
+            // Geolocation is not available, use default location
+            setMap(initialLocation);
+        }
+    }
+
+    function setMap(location) {
+        document.getElementById('latitude').value = location.lat;
+        document.getElementById('longitude').value = location.lng;
+        map = new google.maps.Map(document.getElementById('locationMap'), {
+            center: location,
+            zoom: 15
+        });
+
+        marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            draggable: true
+        });
+
+        // Update the hidden inputs whenever the marker is dragged
+        google.maps.event.addListener(marker, 'dragend', function() {
+            document.getElementById('latitude').value = marker.getPosition().lat();
+            document.getElementById('longitude').value = marker.getPosition().lng();
+        });
+    }
+</script>
+
+<script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${googleMapsApiKey} + '&callback=initMap'"></script>
+</body>
+</html>

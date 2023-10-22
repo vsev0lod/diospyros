@@ -4,65 +4,49 @@
  */
 package com.diospyros.uplift.persistence.entities;
 
-import java.io.Serializable;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * JPA entity class for "Item"
  *
  * @author Telosys
- *
  */
-@Getter
-@Setter
+@Data
 @Entity
-@Table(name="item", schema="public" )
+@Table(name = "item", schema = "public")
 public class Item implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     //--- PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private int        id ;
+    @Column(name = "id", nullable = false)
+    private UUID id;
 
     //--- OTHER DATA FIELDS 
-    @Column(name="cost", nullable=false)
-    private int        cost ;
+    @Column(name = "cost", nullable = false)
+    private int cost;
 
-    @Column(name="description", nullable=false, length=100)
-    private String     description ;
+    @Column(name = "description", nullable = false, length = 100)
+    private String description;
 
-//    @Column(name="partner_id")
-//    private Integer    partnerId ;
 
     //--- LINKS ( RELATIONSHIPS )
     @ManyToOne
-    @JoinColumn(name="partner_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Partner    partner ;
-
-    /**
-     * Constructor
-     */
-    public Item() {
-		super();
-    }
-
-	@Override
-	public String toString() { 
-		String separator = "|";
-		StringBuilder sb = new StringBuilder();
-		sb.append("Item[");
-		sb.append("id=").append(id);
-		sb.append(separator).append("cost=").append(cost);
-		sb.append(separator).append("description=").append(description);
-//		sb.append(separator).append("partnerId=").append(partnerId);
-		sb.append("]");
-		return sb.toString();
-	}
+    @JoinColumn(name = "partner_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Partner partner;
 
 }
