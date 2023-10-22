@@ -46,7 +46,7 @@
 
     <div class="mt-4">
         <a href="#" th:if="${solution != null}" th:href="@{'/task/' + ${task.id} + '/solution'}" class="btn btn-success">View solution</a>
-        <a href="#" th:if="${solution == null}" th:href="@{'/solution/' + ${task.id} + '/create'}" class="btn btn-success">Submit report</a>
+        <a href="#" th:if="${solution == null}" th:href="@{'/solution/' + ${task.id} + '/create'}" class="btn btn-success">Create report</a>
     </div>
     <section>
         <div id="taskLocation" style="width:100%;height:400px;"></div>

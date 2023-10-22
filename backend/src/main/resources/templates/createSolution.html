@@ -21,7 +21,8 @@
         <!-- Solution Description -->
         <div class="form-group">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+<!--            <textarea th:field="*{description}" class="form-control" id="description" name="description" rows="4" required></textarea>-->
+            <textarea class="form-control" id="description" field="*{description}" rows="4"></textarea>
         </div>
 
         <!-- Upload Photos -->

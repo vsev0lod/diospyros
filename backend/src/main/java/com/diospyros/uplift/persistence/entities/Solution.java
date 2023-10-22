@@ -13,6 +13,7 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,6 +31,7 @@ import java.util.UUID;
 @Table(name = "solution", schema = "public")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Solution implements Serializable {
 
     @Serial

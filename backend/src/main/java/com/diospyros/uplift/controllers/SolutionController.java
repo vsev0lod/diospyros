@@ -1,10 +1,14 @@
 package com.diospyros.uplift.controllers;
 
+import com.diospyros.uplift.Status;
 import com.diospyros.uplift.dto.SolutionDTO;
+import com.diospyros.uplift.persistence.entities.Solution;
 import com.diospyros.uplift.persistence.entities.Task;
 import com.diospyros.uplift.persistence.entities.Users;
+import com.diospyros.uplift.persistence.repositories.SolutionRepository;
 import com.diospyros.uplift.persistence.repositories.TaskRepository;
 import com.diospyros.uplift.persistence.repositories.UsersRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Controller
@@ -25,6 +31,10 @@ public class SolutionController {
 
     @Autowired
     private TaskRepository taskRepository;
+    @Autowired
+    private SolutionRepository solutionRepository;
+    @Autowired
+    private UsersRepository usersRepository;
 
     @GetMapping("/{taskId}")
     public String showSolution(@PathVariable String taskId) {
@@ -42,7 +52,7 @@ public class SolutionController {
     @PostMapping("/{taskId}/create")
     public String handleSolutionSubmission(@ModelAttribute SolutionDTO solutionDTO,
                                            @PathVariable String taskId,
-                                           RedirectAttributes redirectAttributes) {
+                                           RedirectAttributes redirectAttributes, HttpSession session) {
 
         Task task = taskRepository.findById(UUID.fromString(taskId)).orElseThrow(IllegalArgumentException::new);
 
@@ -50,22 +60,39 @@ public class SolutionController {
         String description = solutionDTO.getDescription();
 
         // Process the uploaded photos
-        MultipartFile[] photos = solutionDTO.getPhotos();
-        for (MultipartFile photo : photos) {
-            try {
-                byte[] bytes = photo.getBytes();
-                // Store the bytes in the database or somewhere else as needed
-                // You can also add logic for checking the file type, size, etc.
-            } catch (IOException e) {
-                e.printStackTrace();
-                redirectAttributes.addFlashAttribute("errorMessage", "Failed to upload photos. Please try again.");
-                return "redirect:/solution/{taskId}/create";
-            }
+//        MultipartFile[] photos = solutionDTO.getPhotos();
+//        for (MultipartFile photo : photos) {
+//            try {
+//                byte[] bytes = photo.getBytes();
+//                // Store the bytes in the database or somewhere else as needed
+//                // You can also add logic for checking the file type, size, etc.
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                redirectAttributes.addFlashAttribute("errorMessage", "Failed to upload photos. Please try again.");
+//                return "redirect:/solution/{taskId}/create";
+//            }
+//        }
+
+        Object userId = session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/auth/login";
         }
+//        Users user = usersRepository.findById(UUID.fromString(userId.toString())).orElseThrow(IllegalArgumentException::new);
+
+
+        Solution solution = Solution.builder()
+                .id(UUID.randomUUID())
+                .creatorId(UUID.fromString(userId.toString()))
+                .taskId(UUID.fromString(taskId))
+                .description(solutionDTO.getDescription() == null? "Sample description" : solutionDTO.getDescription())
+                .build();
+
+        solutionRepository.save(solution);
 
         // You can add additional logic to store the description and photos into the database
 
         redirectAttributes.addFlashAttribute("successMessage", "Solution created successfully.");
-        return "redirect:/"; // Redirect to the home page or any other page after successful submission
+//        return "redirect:/"; // Redirect to the home page or any other page after successful submission
+        return "redirect:/task/"+ taskId.toString() + "/solution"; // Redirect to the home page or any other page after successful submission
     }
 }
