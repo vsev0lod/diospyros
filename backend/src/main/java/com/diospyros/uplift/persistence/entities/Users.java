@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serial;
@@ -25,6 +26,7 @@ import java.util.UUID;
 
 @Entity
 @Data
+@AllArgsConstructor
 @Table(name = "users", schema = "public")
 public class Users implements Serializable {
 

@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serial;
@@ -22,6 +23,7 @@ import java.util.UUID;
  */
 @Entity
 @Data
+@AllArgsConstructor
 @Table(name = "attachment", schema = "public")
 public class Attachment implements Serializable {
 
