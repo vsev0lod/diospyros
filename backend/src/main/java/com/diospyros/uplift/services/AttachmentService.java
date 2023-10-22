@@ -130,17 +130,10 @@ public class AttachmentService extends GenericService<Attachment, AttachmentDTO>
 		}
 	}
 
-	/**
-	 * Creates the given entity
-	 *
-	 * @param dto
-	 * @return true if created, false if already exists
-	 */
-	public boolean create(AttachmentDTO dto) {
+	public Attachment create(AttachmentDTO dto) {
 		logger.debug("create({})", dto);
 		// auto-generated Primary Key
-		repository.save(dtoToEntity(dto));
-		return true; // always created
+		return repository.save(dtoToEntity(dto));
 	}
 
 	/**

@@ -2,13 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="'UPLIFT - ' + ${user.name}"></title>
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+            integrity="Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z"
+            crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon.png}"/>
     <!-- Local Bootstrap CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-
     <!-- Local Bootstrap JS and dependencies -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!-- Optionally, include the Font Awesome stylesheet if you're using it -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
+
     <style>
         body {
             padding-top: 70px;
@@ -35,10 +40,12 @@
 </ul>
 
 <section>
-    <h2>Map</h2>
     <div id="googleMap" style="width:100%;height:400px;"></div>
 </section>
-
+<!-- The FAB -->
+<a href="/task/new" class="btn btn-primary fab">
+    <i class="fas fa-plus"></i>
+</a>
 <script>
     function myMap() {
         var mapProp= {

@@ -82,7 +82,7 @@ public class AttachmentRestController {
 	@PostMapping("")
 	protected ResponseEntity<Void> create(@RequestBody AttachmentDTO attachmentDTO) {
     	logger.debug("REST : POST - create");
-		if ( service.create(attachmentDTO) ) {
+		if ( service.create(attachmentDTO) != null ) {
 			return ResponseEntity.status(HttpStatus.CREATED).build(); // 201 created
 		}
 		else {

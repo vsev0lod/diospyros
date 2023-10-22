@@ -1,0 +1,12 @@
+.fab {
+    position: fixed;          /* Keeps the button fixed on scrolling */
+    bottom: 30px;             /* Adjust this value to move the FAB higher or lower from the bottom */
+    right: 30px;              /* Adjust this value to move the FAB closer or farther from the right side */
+    border-radius: 50%;      /* Makes it circular */
+    width: 56px;
+    height: 56px;
+    line-height: 40px;        /* vertically centers the icon */
+    text-align: center;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);  /* Optional: Adds a bit of shadow for depth */
+    z-index: 1000;           /* Ensures the FAB is above other elements on the page */
+}
