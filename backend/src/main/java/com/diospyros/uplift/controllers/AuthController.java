@@ -71,8 +71,15 @@ public class AuthController {
         // 4. Handle the uploaded avatar.
         MultipartFile avatarFile = registerDTO.getAvatar();
 
-        userRepository.save(newUser);
-        attachmentRepository.save(new Attachment(UUID.randomUUID(), newUser.getId(), avatarFile.getBytes()));
+        if (avatarFile == null) {
+            userRepository.save(newUser);
+            attachmentRepository.save(new Attachment(UUID.randomUUID(), newUser.getId(), null));
+        } else {
+            userRepository.save(newUser);
+            attachmentRepository.save(new Attachment(UUID.randomUUID(), newUser.getId(), avatarFile.getBytes()));
+
+        }
+
 
         // 5. Redirect to a relevant page (for now, redirect to login after registration)
         return "redirect:/auth/login?success";
