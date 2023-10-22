@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'UPLIFT - ' + ${task.title}"></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+            integrity="Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z"
+            crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon.png}"/>
+    <!-- Local Bootstrap CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Local Bootstrap JS and dependencies -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!-- Optionally, include the Font Awesome stylesheet if you're using it -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link th:href="@{/css/custom.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Create Solution</h2>
+    <form th:action="@{/solution/create}" method="post" enctype="multipart/form-data">
+        <!-- Solution Description -->
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+        </div>
+
+        <!-- Upload Photos -->
+        <div class="form-group">
+            <label for="photos">Upload Photos:</label>
+            <input type="file" class="form-control-file" id="photos" name="photos" multiple>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Submit Solution</button>
+    </form>
+</div>
+</body>
+</html>

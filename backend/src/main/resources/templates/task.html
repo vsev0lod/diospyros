@@ -43,7 +43,10 @@
     <p class="mb-4">
         💰<span th:text="${task.reward.intValue()}"></span>
     </p>
-
+    <!-- Add "Submit report" button -->
+    <div class="mt-4">
+        <a href="#" th:href="@{/solution/create}" class="btn btn-success">Submit report</a>
+    </div>
     <section>
         <div id="taskLocation" style="width:100%;height:400px;"></div>
     </section>
