@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="'UPLIFT - ' + ${user.name}"></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon.png}"/>
     <!-- Local Bootstrap CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -17,21 +18,21 @@
 
 <body>
 
-<header class="mb-4 bg-dark text-white text-right p-3 fixed-top">
-    <!-- Uncomment the below line when you need the avatar -->
-    <!-- <img th:src="@{'data:image/png;base64,' + ${T(org.springframework.util.Base64Utils).encodeToString(user.avatar)}}" alt="User Avatar" class="rounded-circle" width="50"> -->
+<header class="mb-4 bg-dark text-white p-3 fixed-top d-flex justify-content-between align-items-center">
+    <!-- User's balance on the left with a coin emoji -->
+    <div class="h4"><span>💰</span> <span th:text="${user.balance.intValue()}"></span></div>
+
+    <!-- User's name on the right -->
     <span th:text="${user.name}" class="h4"></span>
 </header>
-
-
-<section class="mb-4">
-    <h2>Tasks</h2>
-    <div class="bg-white p-3 rounded">
-        <ul>
-            <li th:each="task : ${tasks}" th:text="${task.title}"></li>
-        </ul>
-    </div>
-</section>
+<ul class="list-group">
+    <li th:each="task : ${tasks}" class="list-group-item">
+        <!-- Wrap each task in an <a> tag -->
+        <a th:href="@{/task/{id}(id=${task.id})}" class="d-block">
+            <span th:text="${task.title}"></span>
+        </a>
+    </li>
+</ul>
 
 <section>
     <h2>Map</h2>
@@ -48,6 +49,5 @@
     }
 </script>
 <script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${googleMapsApiKey} + '&callback=myMap'"></script>
-
 </body>
 </html>
