@@ -1,5 +1,7 @@
-# diospyros
+# Diospyros UPLIFT
 Collabothon 2023 - Diospyros
+
+Upgrade Prague Life, Improve Future Together!
 
 ## Working prototype
 https://backend-vrtvloyzta-oe.a.run.app/
