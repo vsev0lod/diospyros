@@ -2,7 +2,9 @@ package com.diospyros.uplift.controllers;
 
 import com.diospyros.uplift.dto.LoginDTO;
 import com.diospyros.uplift.dto.RegisterDTO;
+import com.diospyros.uplift.persistence.entities.Attachment;
 import com.diospyros.uplift.persistence.entities.Users;
+import com.diospyros.uplift.persistence.repositories.AttachmentRepository;
 import com.diospyros.uplift.persistence.repositories.UsersRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,6 +27,9 @@ public class AuthController {
 
     @Autowired
     private UsersRepository userRepository;
+
+    @Autowired
+    private AttachmentRepository attachmentRepository;
 
     @GetMapping("/login")
     public String loginForm(Model model) {
@@ -47,7 +54,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String handleRegistration(@ModelAttribute RegisterDTO registerDTO) {
+    public String handleRegistration(@ModelAttribute RegisterDTO registerDTO) throws IOException {
         // 1. Check if the user already exists (by email/username).
         if (userRepository.findByEmail(registerDTO.getEmail()).isPresent()) {
             // Redirect with an error message, user already exists
@@ -57,17 +64,15 @@ public class AuthController {
         if (!registerDTO.getPassword().equals(registerDTO.getConfirmPassword())) {
             return "redirect:/auth/register?error=passwordsdontmatch";
         }
-        Users newUser = new Users();
-        newUser.setId(UUID.randomUUID());
-        newUser.setUserType();
-        newUser.setEmail(registerDTO.getEmail());
-        newUser.setName(registerDTO.getUsername());
-        newUser.setPassword(registerDTO.getPassword());
+        Users newUser = new Users(UUID.randomUUID(), registerDTO.getEmail(), registerDTO.getPassword(),
+                BigDecimal.valueOf(5), registerDTO.getUserType(), registerDTO.getUsername(), "", BigDecimal.ZERO);
+
 
         // 4. Handle the uploaded avatar.
         MultipartFile avatarFile = registerDTO.getAvatar();
 
         userRepository.save(newUser);
+        attachmentRepository.save(new Attachment(UUID.randomUUID(), newUser.getId(), avatarFile.getBytes()));
 
         // 5. Redirect to a relevant page (for now, redirect to login after registration)
         return "redirect:/auth/login?success";

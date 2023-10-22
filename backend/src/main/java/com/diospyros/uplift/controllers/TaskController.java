@@ -2,8 +2,10 @@ package com.diospyros.uplift.controllers;
 
 import com.diospyros.uplift.Status;
 import com.diospyros.uplift.dto.NewTaskDTO;
+import com.diospyros.uplift.persistence.entities.Attachment;
 import com.diospyros.uplift.persistence.entities.Task;
 import com.diospyros.uplift.persistence.entities.Users;
+import com.diospyros.uplift.persistence.repositories.AttachmentRepository;
 import com.diospyros.uplift.persistence.repositories.TaskRepository;
 import com.diospyros.uplift.persistence.repositories.UsersRepository;
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -31,6 +34,9 @@ public class TaskController {
 
     @Autowired
     private UsersRepository userRepository;
+
+    @Autowired
+    private AttachmentRepository attachmentRepository;
 
     @Value("${google.maps.api.key}")
     private String googleMapsApiKey;
@@ -75,11 +81,7 @@ public class TaskController {
             return "redirect:/auth/login";
         }
 
-        // Save the photos and set their references to the task (you would need to implement this part)
-        saveUploadedPhotos(task, photos);
-
-        // Set the current user as the creator of the task
-        Users user = userRepository.findById(UUID.fromString(userId.toString())).orElseThrow(IllegalArgumentException::new);
+        Users user = userRepository.findById(UUID.fromString(userId)).orElseThrow(IllegalArgumentException::new);
 
         Task newTask = Task.builder().
                 title(task.getTitle())
@@ -92,13 +94,19 @@ public class TaskController {
                 .location(latitude + "," + longitude)
                 .status(Status.DEFINED.toString())
                 .build();
-
+        saveUploadedPhotos(newTask.getId(), photos);
         taskRepository.save(newTask);
 
         return "redirect:/";  // Redirect to index or wherever you wish after a successful task creation
     }
 
-    private void saveUploadedPhotos(NewTaskDTO task, MultipartFile[] photos) {
-
+    private void saveUploadedPhotos(UUID taskID, MultipartFile[] photos) {
+        for (MultipartFile photo : photos) {
+            try {
+                attachmentRepository.save(new Attachment(UUID.randomUUID(), taskID, photo.getBytes()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
