@@ -4,10 +4,12 @@
     <title>Diospyros UPLIFT</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+            integrity="Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z"
+            crossorigin="anonymous"></script>
 
-    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon.png}" />
- <!-- Local Bootstrap CSS -->
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon.png}"/>
+    <!-- Local Bootstrap CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 
     <!-- Local Bootstrap JS and dependencies -->
@@ -19,16 +21,20 @@
 <form th:action="@{/auth/login}" th:object="${loginDTO}" method="post">
     <div>
         <label>Username:</label>
-        <input type="text" th:field="*{username}" />
+        <input type="text" th:field="*{username}"/>
     </div>
     <div>
         <label>Password:</label>
-        <input type="password" th:field="*{password}" />
+        <input type="password" th:field="*{password}"/>
     </div>
     <div>
-        <input type="submit" value="Login" />
+        <input type="submit" value="Login"/>
     </div>
 </form>
 
+<!-- Switch to Login page -->
+<div class="mt-3">
+    <p>Don't have an account? <a th:href="@{/auth/register}">Register</a></p>
+</div>
 </body>
 </html>
