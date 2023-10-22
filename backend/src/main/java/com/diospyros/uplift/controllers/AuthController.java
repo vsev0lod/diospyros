@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/auth")
@@ -57,6 +58,8 @@ public class AuthController {
             return "redirect:/auth/register?error=passwordsdontmatch";
         }
         Users newUser = new Users();
+        newUser.setId(UUID.randomUUID());
+        newUser.setUserType();
         newUser.setEmail(registerDTO.getEmail());
         newUser.setName(registerDTO.getUsername());
         newUser.setPassword(registerDTO.getPassword());

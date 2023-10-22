@@ -37,11 +37,11 @@ public class TaskController {
 
     @GetMapping("/{id}")
     public String taskPage(@PathVariable String id, Model model, HttpSession session) {
-        String userId = session.getAttribute("userId").toString();
+        Object userId = session.getAttribute("userId");
         if (userId == null) {
             return "redirect:/auth/login";
         }
-        Users user = userRepository.findById(UUID.fromString(userId)).orElseThrow(IllegalArgumentException::new);
+        Users user = userRepository.findById(UUID.fromString(userId.toString())).orElseThrow(IllegalArgumentException::new);
         model.addAttribute("user", user);
         model.addAttribute("googleMapsApiKey", googleMapsApiKey);
         Task task = taskRepository.findById(UUID.fromString(id)).orElseThrow(IllegalArgumentException::new);
@@ -51,12 +51,12 @@ public class TaskController {
 
     @GetMapping("/new")
     public String newTask(Model model, HttpSession session) {
-        String userId = session.getAttribute("userId").toString();
+        Object userId = session.getAttribute("userId");
         if (userId == null) {
             return "redirect:/auth/login";
         }
 
-        Users user = userRepository.findById(UUID.fromString(userId)).orElseThrow(IllegalArgumentException::new);
+        Users user = userRepository.findById(UUID.fromString(userId.toString())).orElseThrow(IllegalArgumentException::new);
         model.addAttribute("googleMapsApiKey", googleMapsApiKey);
         model.addAttribute("user", user);
         model.addAttribute("task", new NewTaskDTO());
@@ -70,7 +70,7 @@ public class TaskController {
                                      @RequestParam("longitude") String longitude,
                                      HttpSession session) {
 
-        String userId = session.getAttribute("userId").toString();
+        Object userId = session.getAttribute("userId");
         if (userId == null) {
             return "redirect:/auth/login";
         }
@@ -79,13 +79,13 @@ public class TaskController {
         saveUploadedPhotos(task, photos);
 
         // Set the current user as the creator of the task
-        Users user = userRepository.findById(UUID.fromString(userId)).orElseThrow(IllegalArgumentException::new);
+        Users user = userRepository.findById(UUID.fromString(userId.toString())).orElseThrow(IllegalArgumentException::new);
 
         Task newTask = Task.builder().
                 title(task.getTitle())
                 .description(task.getDescription())
                 .createdAt(LocalDate.now())
-                .creatorId(UUID.fromString(userId))
+                .creatorId(UUID.fromString(userId.toString()))
                 .taskType(task.getTaskType())
                 .tag(user.getUserType())
                 .reward(BigDecimal.valueOf(100))

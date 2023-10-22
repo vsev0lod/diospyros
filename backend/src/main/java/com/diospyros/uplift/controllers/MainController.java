@@ -25,12 +25,12 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage(Model model, HttpSession session) {
-        String userId = session.getAttribute("userId").toString();
+        Object userId = session.getAttribute("userId");
         if (userId == null) {
             // Handle the case where there is no logged-in user
             return "redirect:/auth/login";
         }
-        Users user = userRepository.findById(UUID.fromString(userId)).orElseThrow(IllegalArgumentException::new);
+        Users user = userRepository.findById(UUID.fromString(userId.toString())).orElseThrow(IllegalArgumentException::new);
         model.addAttribute("user", user);
         model.addAttribute("tasks", taskRepository.findAll());
         model.addAttribute("googleMapsApiKey", googleMapsApiKey);
