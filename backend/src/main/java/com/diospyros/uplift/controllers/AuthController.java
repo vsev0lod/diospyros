@@ -54,7 +54,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String handleRegistration(@ModelAttribute RegisterDTO registerDTO) throws IOException {
+    public String handleRegistration(@ModelAttribute RegisterDTO registerDTO) {
         // 1. Check if the user already exists (by email/username).
         if (userRepository.findByEmail(registerDTO.getEmail()).isPresent()) {
             // Redirect with an error message, user already exists
@@ -68,17 +68,7 @@ public class AuthController {
                 BigDecimal.valueOf(5), registerDTO.getUserType(), registerDTO.getUsername(), "", BigDecimal.ZERO);
 
 
-        // 4. Handle the uploaded avatar.
-        MultipartFile avatarFile = registerDTO.getAvatar();
-
-        if (avatarFile == null) {
             userRepository.save(newUser);
-            attachmentRepository.save(new Attachment(UUID.randomUUID(), newUser.getId(), null));
-        } else {
-            userRepository.save(newUser);
-            attachmentRepository.save(new Attachment(UUID.randomUUID(), newUser.getId(), avatarFile.getBytes()));
-
-        }
 
 
         // 5. Redirect to a relevant page (for now, redirect to login after registration)
