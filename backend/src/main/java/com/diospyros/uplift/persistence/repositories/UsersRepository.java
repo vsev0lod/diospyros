@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Spring Data JPA repository for entity "Users" <br> 
@@ -29,11 +30,9 @@ import java.util.Optional;
  *
  */
 @Repository
-public interface UsersRepository extends JpaRepository<Users, Integer> {
+public interface UsersRepository extends JpaRepository<Users, UUID> {
 
-	// Insert specific finders here 
-
-	Optional<Users> findByName(String name);
+	// Insert specific finders here
 
 	Optional<Users> findByEmail(String email);
 

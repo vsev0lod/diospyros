@@ -4,89 +4,46 @@
  */
 package com.diospyros.uplift.persistence.entities;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
-
-import jakarta.persistence.*;
-import jakarta.persistence.Entity;
+import java.util.UUID;
 
 /**
  * JPA entity class for "Partner"
  *
  * @author Telosys
- *
  */
 @Entity
-@Table(name="partner", schema="public" )
+@Data
+@Table(name = "partner", schema = "public")
 public class Partner implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     //--- PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private int        id ;
+    @Column(name = "id", nullable = false)
+    private UUID id;
 
     //--- OTHER DATA FIELDS 
-    @Column(name="name", nullable=false, length=50)
-    private String     name ;
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
 
-    @Column(name="description", nullable=false, length=100)
-    private String     description ;
+    @Column(name = "description", nullable = false, length = 100)
+    private String description;
 
-    @Column(name="website", length=100)
-    private String     website ;
+    @Column(name = "website", length = 100)
+    private String website;
 
-    @OneToMany(mappedBy="partner")
+    @OneToMany(mappedBy = "partner")
     private List<Item> items;
-
-    /**
-     * Constructor
-     */
-    public Partner() {
-		super();
-    }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setName( String name ) {
-        this.name = name ;
-    }
-    public String getName() {
-        return this.name;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setWebsite( String website ) {
-        this.website = website ;
-    }
-    public String getWebsite() {
-        return this.website;
-    }
-
-	@Override
-	public String toString() { 
-		String separator = "|";
-		StringBuilder sb = new StringBuilder();
-		sb.append("Partner[");
-		sb.append("id=").append(id);
-		sb.append(separator).append("name=").append(name);
-		sb.append(separator).append("description=").append(description);
-		sb.append(separator).append("website=").append(website);
-		sb.append("]");
-		return sb.toString();
-	}
-
 }

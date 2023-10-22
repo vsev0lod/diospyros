@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Spring Data JPA repository for entity "Attachment" <br> 
@@ -29,7 +30,7 @@ import java.util.Optional;
  *
  */
 @Repository
-public interface AttachmentRepository extends JpaRepository<Attachment, Integer> {
+public interface AttachmentRepository extends JpaRepository<Attachment, UUID> {
 
 	// Insert specific finders here 
 

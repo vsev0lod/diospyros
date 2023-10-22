@@ -33,7 +33,7 @@ public class AuthController {
     public String handleLogin(@ModelAttribute LoginDTO loginDTO, HttpSession session) {
         Optional<Users> user = userRepository.findByEmail(loginDTO.getUsername());
         if (user.isPresent() && user.map(Users::getPassword).filter(loginDTO.getPassword()::equals).isPresent()) {
-            session.setAttribute("userId", user.get().getId());
+            session.setAttribute("userId", user.get().getId().toString());
             return "redirect:/";
         }
         return "redirect:/auth/login?error"; // return to login with an error

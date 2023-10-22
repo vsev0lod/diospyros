@@ -4,136 +4,45 @@
  */
 package com.diospyros.uplift.persistence.entities;
 
-import java.io.Serializable;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * JPA entity class for "Solution"
  *
  * @author Telosys
- *
  */
 @Entity
-@Table(name="solution", schema="public" )
+@Data
+@Table(name = "solution", schema = "public")
 public class Solution implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     //--- PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private int        id ;
+    @Column(name = "id", nullable = false)
+    private UUID id;
 
     //--- OTHER DATA FIELDS 
-    @Column(name="description", nullable=false, length=100)
-    private String     description ;
+    @Column(name = "description", nullable = false, length = 100)
+    private String description;
 
-    @Column(name="entity_id")
-    private Integer    entityId ;
+    @Column(name = "creator_id")
+    private UUID creatorId;
 
-//    @OneToOne
-//    @Column(name="task_id")
-//    private Integer    taskId ;
-
-    @Column(name="creator_id")
-    private Integer    creatorId ;
-
-    //--- LINKS ( RELATIONSHIPS )
-    @ManyToOne
-    @JoinColumn(name="creator_id", referencedColumnName="id", insertable=false, updatable=false)
-    private Users users;
-
-    @ManyToOne
-    @JoinColumn(name="entity_id", referencedColumnName="id", insertable=false, updatable=false)
-    private com.diospyros.uplift.persistence.entities.Entity     entity ;
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "task_id")
-    private Task task;
-
-    /**
-     * Constructor
-     */
-    public Solution() {
-		super();
-    }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setDescription( String description ) {
-        this.description = description ;
-    }
-    public String getDescription() {
-        return this.description;
-    }
-
-    public void setEntityId( Integer entityId ) {
-        this.entityId = entityId ;
-    }
-    public Integer getEntityId() {
-        return this.entityId;
-    }
-
-//    public void setTaskId( Integer taskId ) {
-//        this.taskId = taskId ;
-//    }
-//    public Integer getTaskId() {
-//        return this.taskId;
-//    }
-    public void setTask( Task task ) {
-        this.task = task ;
-    }
-
-    public void setCreatorId( Integer creatorId ) {
-        this.creatorId = creatorId ;
-    }
-    public Integer getCreatorId() {
-        return this.creatorId;
-    }
-
-    public Users getUsers() {
-        return this.users;
-    }
-
-    public com.diospyros.uplift.persistence.entities.Entity getEntity() {
-        return this.entity;
-    } 
-
-    public Task getTask() {
-        return this.task;
-    } 
-
-	@Override
-	public String toString() { 
-		String separator = "|";
-		StringBuilder sb = new StringBuilder();
-		sb.append("Solution[");
-		sb.append("id=").append(id);
-		sb.append(separator).append("description=").append(description);
-		sb.append(separator).append("entityId=").append(entityId);
-		sb.append(separator).append("taskId=").append(task.getId());
-		sb.append(separator).append("creatorId=").append(creatorId);
-		sb.append("]");
-		return sb.toString();
-	}
-
+    @Column(name = "task_id")
+    private UUID taskId;
 }

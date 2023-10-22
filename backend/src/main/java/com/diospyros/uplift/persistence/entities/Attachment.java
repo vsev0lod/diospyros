@@ -4,63 +4,37 @@
  */
 package com.diospyros.uplift.persistence.entities;
 
-import java.io.Serializable;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * JPA entity class for "Attachment"
  *
  * @author Telosys
- *
  */
 @Entity
-@Table(name="attachment", schema="public" )
+@Data
+@Table(name = "attachment", schema = "public")
 public class Attachment implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    //--- PRIMARY KEY 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id", nullable=false)
-    private int        id ;
+    private UUID id;
 
-    //--- OTHER DATA FIELDS 
+    @Column(name = "owner_id", nullable = false)
+    private UUID owner_id;
+
     @Lob
-    @Column(name="attachment", nullable=false)
-    private byte[]     attachment ;
-
-    /**
-     * Constructor
-     */
-    public Attachment() {
-		super();
-    }
-    
-    public void setId( int id ) {
-        this.id = id ;
-    }
-    public int getId() {
-        return this.id;
-    }
-
-    public void setAttachment( byte[] attachment ) {
-        this.attachment = attachment ;
-    }
-    public byte[] getAttachment() {
-        return this.attachment;
-    }
-
-	@Override
-	public String toString() { 
-		String separator = "|";
-		StringBuilder sb = new StringBuilder();
-		sb.append("Attachment[");
-		sb.append("id=").append(id);
-		// attribute 'attachment' (type byte[]) not usable in toString() 
-		sb.append("]");
-		return sb.toString();
-	}
-
+    @Column(name = "attachment", nullable = false)
+    private byte[] attachment;
 }

@@ -10,6 +10,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.diospyros.uplift.persistence.entities.Partner;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 /**
  * Spring Data JPA repository for entity "Partner" <br> 
  * 
@@ -26,7 +28,7 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface PartnerRepository extends JpaRepository<Partner, Integer> {
+public interface PartnerRepository extends JpaRepository<Partner, UUID> {
 
 	// Insert specific finders here 
 

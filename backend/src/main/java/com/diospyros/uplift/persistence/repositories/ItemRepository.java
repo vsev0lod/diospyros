@@ -10,6 +10,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.diospyros.uplift.persistence.entities.Item;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 /**
  * Spring Data JPA repository for entity "Item" <br> 
  * 
@@ -26,7 +28,7 @@ import org.springframework.stereotype.Repository;
  *
  */
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Integer> {
+public interface ItemRepository extends JpaRepository<Item, UUID> {
 
 	// Insert specific finders here 
 

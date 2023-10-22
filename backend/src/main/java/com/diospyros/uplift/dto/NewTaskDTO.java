@@ -1,15 +1,12 @@
 package com.diospyros.uplift.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
+import java.util.UUID;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class NewTaskDTO implements Serializable {
     private String title;
     private String description;
@@ -18,6 +15,6 @@ public class NewTaskDTO implements Serializable {
     private String latitude;
     private String longtitude;
     private Integer reward;
-    private Integer creatorId;
+    private UUID creatorId;
     private MultipartFile[] photos;
 }
