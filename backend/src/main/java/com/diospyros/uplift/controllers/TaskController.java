@@ -85,6 +85,7 @@ public class TaskController {
 
         Task newTask = Task.builder().
                 title(task.getTitle())
+                .id(UUID.randomUUID())
                 .description(task.getDescription())
                 .createdAt(LocalDate.now())
                 .creatorId(UUID.fromString(userId.toString()))
@@ -94,19 +95,22 @@ public class TaskController {
                 .location(latitude + "," + longitude)
                 .status(Status.DEFINED.toString())
                 .build();
-        saveUploadedPhotos(newTask.getId(), photos);
+//        saveUploadedPhotos(newTask.getId(), photos);
         taskRepository.save(newTask);
 
         return "redirect:/";  // Redirect to index or wherever you wish after a successful task creation
     }
 
     private void saveUploadedPhotos(UUID taskID, MultipartFile[] photos) {
-        for (MultipartFile photo : photos) {
-            try {
-                attachmentRepository.save(new Attachment(UUID.randomUUID(), taskID, photo.getBytes()));
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            if (photos != null) {
+                for (MultipartFile photo : photos) {
+                    attachmentRepository.save(new Attachment(UUID.randomUUID(), taskID, photo.getBytes()));
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
+
