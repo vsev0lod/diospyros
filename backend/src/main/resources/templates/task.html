@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'UPLIFT - ' + ${task.title}"></title>
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon.png}"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="Qg00WFl9r0Xr6rUqNLv1ffTSSKEFFCDCKVyHZ+sVt8KuvG99nWw5RNvbhuKgif9z" crossorigin="anonymous"></script>
+
+    <!-- Local Bootstrap CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Local Bootstrap JS and dependencies -->
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="mb-4 bg-dark text-white p-3 fixed-top d-flex justify-content-between align-items-center">
+    <!-- User's balance on the left with a coin emoji -->
+    <div class="h4"><span>💰</span> <span th:text="${user.balance.intValue()}"></span></div>
+
+    <!-- User's name on the right -->
+    <span th:text="${user.name}" class="h4"></span>
+</header>
+
+<div class="container mt-5">
+    <!-- Task Title -->
+    <h1 th:text="${task.title}" class="mb-4"></h1>
+
+    <!-- Task Description -->
+    <p th:text="${task.description}" class="mb-4"></p>
+    <!-- Tag -->
+    <span class="badge badge-primary" th:text="${task.tag}"></span>
+
+    <!-- Creator's Name -->
+    <p class="mb-4"><strong>Created by:</strong> <span th:text="${user.name}"></span></p>
+
+    <!-- Reward -->
+    <p class="mb-4">
+        💰<span th:text="${task.reward.intValue()}"></span>
+    </p>
+
+    <div class="mt-4">
+        <a href="#" th:if="${solution != null}" th:href="@{'/task/' + ${task.id} + '/solution'}" class="btn btn-success">View solution</a>
+        <a href="#" th:if="${solution == null}" th:href="@{'/solution/' + ${task.id} + '/create'}" class="btn btn-success">Submit report</a>
+    </div>
+    <section>
+        <div id="taskLocation" style="width:100%;height:400px;"></div>
+    </section>
+</div>
+
+<script>
+    function initMap() {
+        var coords = "[[${task.location}]]".replace('(', '').replace(')', '');
+        var [lat, lng] = coords.split(',').map(coord => parseFloat(coord.trim()));
+
+        var mapProp = {
+            center: new google.maps.LatLng(lat, lng),
+            zoom: 15,
+        };
+
+        var map = new google.maps.Map(document.getElementById("taskLocation"), mapProp);
+        var marker = new google.maps.Marker({
+            position: {lat, lng},
+            map: map
+        });
+    }
+</script>
+<script th:src="'https://maps.googleapis.com/maps/api/js?key=' + ${googleMapsApiKey} + '&callback=initMap'"></script>
+</body>
+</html>

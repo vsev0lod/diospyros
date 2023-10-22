@@ -30,9 +30,9 @@ ext {
 }
 
 flyway {
-	url = 'jdbc:postgresql://localhost:5432/diospyros'
-	user = 'postgres'
-	password = 'diospyros'
+	url = 'jdbc:postgresql://34.32.18.235:5432/diospyros'
+	user = 'backend-service'
+	password = '8XyS`_eFneB$5(K/'
 	schemas = ['public']
 	cleanDisabled = false
 //	placeholders = [
